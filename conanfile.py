@@ -10,14 +10,22 @@ class OpenEXRConan(ConanFile):
     requires = "IlmBase/2.2.0@Mikayex/stable", "zlib/1.2.8@lasote/stable"
     exports = "mingw-fix.patch", "FindOpenEXR.cmake"
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False], "namespace_versioning": [True, False]}
-    default_options = "shared=True", "namespace_versioning=True"
+    options = {"shared": [True, False], "namespace_versioning": [True, False], "fPIC": [True, False]}
+    default_options = "shared=True", "namespace_versioning=True", "fPIC=False"
     generators = "cmake"
     build_policy = "missing"
+
+    def config_options(self):
+        if self.settings.os == "Windows":
+            self.options.remove("fPIC")
 
     def configure(self):
         self.options["IlmBase"].namespace_versioning = self.options.namespace_versioning
         self.options["IlmBase"].shared = self.options.shared
+        if "fPIC" in self.options.fields:
+            if self.options.shared:
+                self.options.fPIC = True
+            self.options["IlmBase"].fPIC = self.options.fPIC
 
     def source(self):
         tools.download("http://download.savannah.nongnu.org/releases/openexr/openexr-%s.tar.gz" % self.version,
@@ -61,6 +69,8 @@ ADD_EXECUTABLE ( dwaLookups""")
             , "NAMESPACE_VERSIONING": self.options.namespace_versioning
             , "USE_ZLIB_WINAPI": False
             })
+        if "fPIC" in self.options.fields:
+            cmake.definitions["CMAKE_POSITION_INDEPENDENT_CODE"] = self.options.fPIC
 
         src_dir = "openexr-%s" % self.version
         cmake.configure(source_dir=src_dir)
