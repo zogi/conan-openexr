@@ -4,6 +4,7 @@ import os
 
 class OpenEXRConan(ConanFile):
     name = "OpenEXR"
+    description = "OpenEXR is a high dynamic-range (HDR) image file format developed by Industrial Light & Magic for use in computer imaging applications."
     version = "2.2.0"
     license = "BSD"
     url = "https://github.com/Mikayex/conan-openexr.git"
