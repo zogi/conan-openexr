@@ -2,10 +2,10 @@
 env:
    global:
      - CONAN_REFERENCE: "OpenEXR/2.2.0"
-     - CONAN_USERNAME: "zogi"
-     - CONAN_LOGIN_USERNAME: "zogi"
+     - CONAN_USERNAME: "Mikayex"
+     - CONAN_LOGIN_USERNAME: "Mikayex"
      - CONAN_CHANNEL: "stable"
-     - CONAN_UPLOAD: "https://github.com/zogi/conan-openexr"
+     - CONAN_UPLOAD: "https://github.com/Mikayex/conan-openexr"
 
 linux: &linux
    os: linux
