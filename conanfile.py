@@ -92,6 +92,7 @@ ADD_EXECUTABLE ( dwaLookups""")
         self.copy("exr*", dst="bin", src="bin", keep_path=False)
 
         self.copy("FindOpenEXR.cmake", src=".", dst=".")
+        self.copy("license*", dst="licenses", src="openexr-%s" % self.version, ignore_case=True, keep_path=False)
 
     def package_info(self):
         parsed_version = self.version.split('.')
