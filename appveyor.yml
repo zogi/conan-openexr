@@ -7,10 +7,10 @@ environment:
 
     CONAN_REFERENCE: "OpenEXR/2.2.0"
     CONAN_USERNAME: "Mikayex"
-    CONAN_LOGIN_USERNAME: "Mikayex"
+    CONAN_LOGIN_USERNAME: "zogi"
     CONAN_CHANNEL: "stable"
     VS150COMNTOOLS: "C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\Common7\\Tools\\"
-    CONAN_UPLOAD: "https://github.com/Mikayex/conan-openexr"
+    CONAN_UPLOAD: "https://api.bintray.com/conan/zogi/conan-packages"
 
     matrix:
         - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
