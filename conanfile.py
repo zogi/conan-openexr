@@ -64,6 +64,14 @@ ADD_EXECUTABLE ( dwaLookups""")
             tools.patch(patch_file="mingw-fix.patch", base_path="openexr-%s" % self.version)
 
     def build(self):
+        if self.settings.os == "Linux":
+            ld_library_paths = os.environ.get("LD_LIBRARY_PATH", "").split(":")
+            ld_library_paths = [path for path in ld_library_paths if path]
+            ilmbase_cpp_info = self.deps_cpp_info["IlmBase"]
+            ld_library_paths.extend([ilmbase_cpp_info.rootpath + "/" + libdir
+                                     for libdir in ilmbase_cpp_info.libdirs])
+            os.environ["LD_LIBRARY_PATH"] = ":".join(ld_library_paths)
+
         cmake = CMake(self)
         cmake.definitions.update(
             { "BUILD_SHARED_LIBS": self.options.shared
